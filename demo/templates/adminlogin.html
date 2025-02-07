@@ -1,0 +1,180 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin SignIn  - Financial Project</title>
+
+    <!--font awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    
+    <!--css file-->
+    <link rel="stylesheet" href="{% static 'demo/css/adminloginstyling.css' %}" />
+    
+    <style>
+      #alertMessageadminsign{
+        color: red;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="/adminlogin" id="adminloginform" class="sign-in-form" method="POST">
+            
+            <h2 class="title">Admin Sign-In</h2>
+
+            <div id="alertMessageadminsign"></div>
+            
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="email" placeholder="Admin_ID" name="adminid" required/>
+            </div>
+            
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" class="password" name="adminpassword" required/>
+              <i class="fas fa-eye eye-icon"></i>
+            </div>
+            
+            <input type="submit" value="Login" class="btn solid" />
+            
+          </form>
+          
+          <form action="/changeadminpassword" class="sign-up-form" id="passwordChangeForm" method="POST">
+            
+            <h2 class="title">Change Admin Password</h2>
+
+            <div id="alertMessage"></div>
+
+            
+            
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" placeholder="Admin_ID" name="adminidforcheck" required/>
+            </div>
+            
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="text" placeholder="Enter New Password" name="newpassword" required/>
+            </div>
+            
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="text" placeholder="Confirm New Password" name="againnewpassword" required />
+            </div>
+            
+            <input type="submit" class="btn" value="Click to Proceed" />
+          
+          </form>
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            
+            <h3>Admin! are you wanna change Password?</h3>
+            
+            <p>
+              Click Here to Change Your Password
+            </p>
+            
+            <button class="btn transparent" id="sign-up-btn">Click Here</button>
+          
+          </div>
+          <img src="{% static 'demo/images/one.svg' %}" class="image" alt="" />
+        </div>
+        
+        <div class="panel right-panel">
+          <div class="content">
+            
+            <h3>Hey, Admin!</h3>
+            
+            <p>
+              Click Here to login for Admin Panel
+            </p>
+            
+            <button class="btn transparent" id="sign-in-btn">Login</button>
+          
+          </div>
+          <img src="{% static 'demo/images/two.svg' %}" class="image" alt="" />
+        </div>
+      </div>
+    </div>
+    
+
+ 
+    <script src="{% static 'demo/js/adminloginmain.js' %}"></script>
+
+    <!--Below ajax used tp Process Data and to receive message-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $("#passwordChangeForm").submit(function(event) {
+          event.preventDefault(); // Prevent the default form submission.
+  
+          // Serialize the form data to send via AJAX.
+          var formData = $(this).serialize();
+  
+          $.ajax({
+              type: "POST",
+              url: "/changepassword",
+              data: formData,
+              success: function(response) {
+                  // Reset the form.
+                  $("#passwordChangeForm")[0].reset();
+              
+                  // Update the alert message div with the response.
+                  $("#alertMessage").text(response.alert_message);
+              }
+
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    $("#adminloginform").submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission.
+
+        // Serialize the form data to send via AJAX.
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "/adminlogin",
+            data: formData,
+            success: function(response) {
+
+              if(response.status===200)
+                    {
+                      window.location.href="/admin_dashboard"
+                    }
+              else
+              {
+                // Reset the form.
+                $("#adminloginform")[0].reset();
+            
+                // Update the alert message div with the response.
+                $("#alertMessageadminsign").text(response.alert_messageforadmin);
+              }
+            }
+
+        });
+    });
+});
+</script>
+  
+
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Financial Project Dashboard - Admin</title>
+    <link href="{% static 'demo/css/styles.css'%}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        span {
+            color: red;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="{% url 'index'%}">Financial Project</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div style="font: size 10px; color: rgb(204, 79, 79);">Click Here for your Profile</div>
+
+        </div>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+
+                        <a class="nav-link" href="{% url 'index'%}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="bi bi-person-circle"></i></div>
+                            Members
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'add_members' %}">Add Members</a>
+                                <a class="nav-link" href="{% url 'members_view' %}">View Members</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="bi bi-currency-rupee"></i></div>
+                            Transactions
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed" href="{% url 'add_transactions' %}">
+                                    Add Transactions
+
+                                </a>
+
+                                <a class="nav-link collapsed" href="{% url 'view_transactions' %}">
+                                    View Transactions
+
+                                </a>
+
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutspayment" aria-expanded="false"
+                            aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="bi bi-credit-card-fill"></i></div>
+                            Payments
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutspayment" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'pay_transactions' %}">Pay Transactions</a>
+                                <a class="nav-link" href="{% url 'view_transactions_due' %}">View Transactions Due</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayoutsreports" aria-expanded="false"
+                            aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+                            Reports
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayoutsreports" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{% url 'transactions_report' %}">Transactions Report</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Transactions Due Report</a>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Edit Members</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{% url 'index'%}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Edit Members</li>
+                    </ol>
+
+
+
+
+                    <!--Below div used to show Notification Message after Login-->
+                    <div class="alert alert-warning" role="alert" id="alertMessageforuserlogin">
+                        Edit Member Details
+                    </div>
+
+
+
+                    <form action="{% url 'editmembersprocess' memberid=memberid %}" method="POST"
+                        enctype="multipart/form-data" name="editmembersform" id="editmembersform">
+
+                        {% csrf_token %}
+
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="text" class="form-control " value="{{memberid}}" id="floatingInput"
+                                    name="memberid" placeholder="name@example.com" readonly>
+                                <label for="floatingInput">Member-ID</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="text" class="form-control " id="floatingInput" name="membername"
+                                    placeholder="name@example.com" value="{{member.membername}}" required>
+                                <label for="floatingInput">Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                    name="address" style="height: 100px" required>{{member.address}}</textarea>
+                                <label for="floatingTextarea">Address</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                    name="description" style="height: 100px" required>{{member.description}}</textarea>
+                                <label for="floatingTextarea">Description</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="number" class="form-control " id="floatingInput" name="contactnumber"
+                                    placeholder="name@example.com" value="{{member.contactnumber2}}" required>
+                                <label for="floatingInput">Contact_Number</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="number" class="form-control " id="floatingInput" name="contactnumber2"
+                                    placeholder="name@example.com" value="{{member.contactnumber}}" required>
+                                <label for="floatingInput">Contact_Number-2</label>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="text" class="form-control " id="floatingInput" name="city"
+                                    placeholder="name@example.com" value="{{member.city}}" required>
+                                <label for="floatingInput">City</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 col align-items-center">
+                                {% if member.photo %}
+                                <label for="formFile" class="form-label">Your Previous
+                                    Image is : {{ member.photo }} <span>Please Upload Again Inorder to Process</span>
+                                </label>
+                                <input class="form-control" type="file" id="photo" name="photo" required>
+                                {% else %}
+                                <label for="formFile" class="form-label"><span>Upload Picture for Display
+                                        Picture</span></label>
+                                <input class="form-control" type="file" id="photo" name="photo" required>
+                                {% endif %}
+
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-3 form-floating col align-items-center ">
+                                <input type="date" class="form-control " id="floatingInput" name="joiningdate"
+                                    placeholder="name@example.com" value="{{member.joiningdate}}">
+                                <label for="floatingInput">Select Joining Date</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mb-3 col align-items-center">
+                            <input type="button" value="SUBMIT" data-bs-toggle="modal"
+                                data-bs-target="#EditMembersModal">
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="EditMembersModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Details</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are You Confirm to Update Your Details?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'demo/js/scripts.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#editmembersform").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission.
+
+                // Create FormData object to handle file(Image) data.
+                var formData = new FormData($(this)[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: "{% url 'editmembersprocess' memberid=memberid %}",
+                    data: formData,
+                    contentType: false, // Important: prevent jQuery from adding a content type
+                    processData: false, // Important: prevent jQuery from processing the data
+                    success: function (response) {
+
+                        if (response.status === 200) {
+                            $("#editmembersform")[0].reset();
+                            window.location.href = "{% url 'members_view' %}";
+                        }
+                        else {
+
+                            // Close the modal after a successful response.
+                            $("#EditMembersModal").modal("hide");
+
+                            // Update the alert message div with the response.
+                            $("#alertMessageforuserlogin").text(response.error);
+
+                            // Scroll to the top of the webpage
+                            window.scrollTo({ top: 0 });
+
+
+                        }
+                    }
+
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
